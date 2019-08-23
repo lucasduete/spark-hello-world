@@ -15,9 +15,6 @@ public class LoaderStaticFiles {
         staticFiles.expireTime(120);
 
         init();
-
-
-
     }
 
 }

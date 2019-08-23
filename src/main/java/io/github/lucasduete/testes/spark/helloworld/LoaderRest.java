@@ -1,5 +1,6 @@
 package io.github.lucasduete.testes.spark.helloworld;
 
+import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spark.Redirect;
@@ -145,6 +146,23 @@ public class LoaderRest {
             response.type("application/json");
             response.body("{\"error\":\"" + exception.getMessage() + "\"}");
         });
+
+        get("/json", (request, response) -> {
+            response.type("application/json");
+            return User.builder()
+                    .username("lucasduete")
+                    .email("lucas@mail.com")
+                    .build();
+        }, new JsonTransformer());
+
+        Gson gson = new Gson();
+        get("/jsonLambda", (request, response) -> {
+            response.type("application/json");
+            return User.builder()
+                    .username("lucasduete")
+                    .email("lucas@mail.com")
+                    .build();
+        }, gson::toJson);
 
     }
 }
